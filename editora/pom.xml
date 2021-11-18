@@ -5,16 +5,16 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.6</version>
+		<version>2.5.7</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>dw</groupId>
 	<artifactId>editora</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>editora</name>
-	<description>Projeto exemplo Spring Boor</description>
+	<description>Projeto Editora exemplo</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
