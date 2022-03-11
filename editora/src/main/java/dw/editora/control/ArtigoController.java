@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import dw.editora.model.Artigo;
 import dw.editora.repository.ArtigoRepository;
 
+//CORS
 @CrossOrigin(origins = "http://localhost:3000")
 
 @RestController
