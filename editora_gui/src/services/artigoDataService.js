@@ -1,6 +1,6 @@
 import http from "../http-common"
 
-class ArtigoDataService {
+ class ArtigoDataService {
     getAll(){
         return http.get("/artigos");
     }
@@ -22,10 +22,11 @@ class ArtigoDataService {
     }
 
     deleteAll(){
-        return http.delete('/artigos');
+        return http.delete("/artigos");
     }
 
     findByTitulo(data){
         return http.get('/artigos?titulo=${data}');
     }
 }
+export default new ArtigoDataService();

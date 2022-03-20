@@ -1,7 +1,10 @@
 import React, {Component} from "react";
 import "bootstrap/dist/css/bootstrap.min.css"
 import './App.css';
-import { BrowserRouter, Link } from "react-router-dom";
+import { Routes, BrowserRouter, Route, Link } from "react-router-dom";
+
+import ListArtigo from "./components/listArtigo";
+
 
 class App extends Component {
   render() {
@@ -25,10 +28,14 @@ class App extends Component {
                           </Link>
                         </li>
                       </div>
-
                     </div>
-                  
                   </nav>
+                  <div className="container mt-3">
+                    <Routes>
+                      <Route element={<ListArtigo />} path="/" />
+                      <Route element={<ListArtigo />} path="/list" />
+                    </Routes>
+                  </div>
                 </BrowserRouter>
               </div>
              );
