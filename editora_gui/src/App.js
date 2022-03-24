@@ -4,6 +4,8 @@ import './App.css';
 import { Routes, BrowserRouter, Route, Link } from "react-router-dom";
 
 import ListArtigo from "./components/listArtigo";
+import AddArtigo from "./components/addArtigo";
+import Artigo from "./components/artigo";
 
 
 class App extends Component {
@@ -34,6 +36,8 @@ class App extends Component {
                     <Routes>
                       <Route element={<ListArtigo />} path="/" />
                       <Route element={<ListArtigo />} path="/list" />
+                      <Route element={<AddArtigo />} path="/add" />
+                      <Route element={<Artigo />} path="/list/:id" />
                     </Routes>
                   </div>
                 </BrowserRouter>

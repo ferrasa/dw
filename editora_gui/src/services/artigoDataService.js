@@ -1,32 +1,33 @@
-import http from "../http-common"
+import http from "../http-common";
 
- class ArtigoDataService {
-    getAll(){
-        return http.get("/artigos");
-    }
+class ArtigoDataService {
+  getAll() {
+    return http.get("/artigos");
+  }
 
-    get(id){
-        return http.get("artigos/${id}");
-    }
+  get(id) {
+    return http.get(`/artigos/${id}`);
+  }
 
-    create(data){
-        return http.post("/artigos", data);
-    }
+  create(data) {
+    return http.post("/artigos", data);
+  }
 
-    update(id, data){
-        return http.put("/artigos/${id}", data);
-    }
+  update(id, data) {
+    return http.put(`/artigos/${id}`, data);
+  }
 
-    delete(id){
-        return http.delete('/artigos/${id}');
-    }
+  delete(id) {
+    return http.delete(`/artigos/${id}`);
+  }
 
-    deleteAll(){
-        return http.delete("/artigos");
-    }
+  deleteAll() {
+    return http.delete(`/artigos`);
+  }
 
-    findByTitulo(data){
-        return http.get('/artigos?titulo=${data}');
-    }
+  findByTitulo(data) {
+    return http.get(`/artigos?titulo=${data}`);
+  }
 }
+
 export default new ArtigoDataService();
