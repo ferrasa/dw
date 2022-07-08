@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SecAuth App</title>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css">
+    </head>
+    <body>
+        <section class="section">
+            <div class="container has-text-centered">
+                <div>
+                    <h1 class="title">SecAuth - OAuth2 Spring Security Cognito Login</h1>
+                    <div sec:authorize="isAuthenticated()">
+                        <div class="box">
+                            Hello, <strong th:text="${#authentication.principal.email}"></strong>
+                        </div>
+                    </div>
+                    <div sec:authorize="isAuthenticated()">
+                        <form method="post" th:action="@{/logout}" >
+                          <input type="submit" class="btn btn-danger" value="Logout"/>
+                        </form>
+                    </div>
+                    <div sec:authorize="isAnonymous()">
+                        <div class="box">
+                            <a class="button login is-primary"
+                                th:href="@{/oauth2/authorization/cognito}">SecAuth</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>  
+    </body>
+
+  </html>  
