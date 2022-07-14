@@ -1,5 +1,5 @@
 package dw.secauth.controller;
-
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HomeController {
 
     @GetMapping("/")
-    public String index() {
-        return "index.html";
+    public String index(Authentication a) {
+        if (a != null)
+            return "index.html";
+        return "redirect:oauth2/authorization/cognito";
     }
     
 }
