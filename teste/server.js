@@ -4,7 +4,7 @@ import express from 'express';
 const app = express();
 
 function handleRequest(req, res){
-    res.status(200).send('<h1>FUNCIONOU</h1>');    
+    res.status(200).send('<h1>FUNCIONOU!</h1>');    
 };
 
 app.get('/', handleRequest);
