@@ -23,7 +23,7 @@ app.use(express.json());
 //RETORNA TODOS OS CONTATOS EXISTENTES
 app.get('/', async (req, res) => {
     try {
-        const sql = 'SELECT * FROM agenda';
+        const sql = 'SELECT * FROM contatos';
         const contatos = await db.query(sql);
             
         res.status(200).send(contatos.rows);
@@ -36,30 +36,86 @@ app.get('/', async (req, res) => {
 });
 
 //BUSCA UM CONTATO DADO UM ID
-app.get('/:id', (req, res) => {
+app.get('/:id', async (req, res) => {
     const id = req.params.id;
-
+    try {
+        const sql = 'SELECT * FROM contatos WHERE id = ' + id;
+        const contatos = await db.query(sql);
+            
+        res.status(200).send(contatos.rows);
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).send({erro: 'Um erro ocorreu'});
+    }    
 });
 
 //ADICIONA UM NOVO CONTATO
-app.post('/', (req, res) => {
-    const {nome, telefone, email, nota, ativo} = req.body;
+app.post('/', async (req, res) => {
+    try{
+        const {nome, telefone, email, nota, ativo} = req.body;
+        const values = [nome, telefone, email, nota, ativo];
+        const sql = 'INSERT INTO contatos(nome, telefone, email, nota, ativo) VALUES ($1, $2, $3, $4, $5)';
+
+        const r = await db.query(sql, values);
+        res.status(201).send(r);
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).send({erro: 'Um erro ocorreu'});
+     }    
 });
 
 //ATUALIZA INFORMAÇÕES DE CONTATO
-app.put('/:id', (req, res) => {
+app.put('/:id', async (req, res) => {
     //Obtem valores
     const id = req.params.id;
     const contatoAlterar = req.body;
 
     // Criar a string de UPDATE
-    // Ex.: UPDATE agenda SET nome = $1, telefone = $2 WHERE id = 1 
-    
+    // Ex.: UPDATE contatos SET nome = $1, telefone = $2 WHERE id = 1 
+    var sqlTemp = ['UPDATE contatos'];
+    sqlTemp.push('SET');
+    var temp = [];
+
+    const col = Object.keys(contatoAlterar);
+    col.forEach( ( c, i ) => {
+        temp.push( c + ' = $' + (i + 1) );
+    })
+
+    sqlTemp.push(temp.join(', '));
+    sqlTemp.push('WHERE id = ' + id + ' RETURNING *');
+    const sql = sqlTemp.join(' ');
+
+    //Obtem os valores dos atributos
+    var atributos = col.map( (c) => {
+        return contatoAlterar[c];
+    })
+
+    try{
+        const r = await db.query(sql, atributos);
+        res.status(200).send(r.rows);
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).send({erro: 'Um erro ocorreu'});
+     }    
 });
 
 //REMOVE UM CONTATO
-app.delete('/:id', (req, res) => {
+app.delete('/:id', async (req, res) => {
     const id = req.params.id;
+
+    try{
+        const sql = 'DELETE FROM contatos WHERE id = $1';
+        const r = db.query(sql, [id]);
+        res.status(200).send({mensagem: 'Contato removido'});
+    }
+    catch(e){
+        console.log(e);
+        res.status(500).send({erro: 'Um erro ocorreu'});
+     }    
+
 });
 
 
