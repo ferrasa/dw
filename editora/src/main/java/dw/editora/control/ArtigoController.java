@@ -28,7 +28,6 @@ public class ArtigoController {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             return new ResponseEntity<>(la, HttpStatus.OK);
         } catch (Exception e) {
-            // TODO: handle exception
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
