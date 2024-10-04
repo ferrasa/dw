@@ -1,0 +1,62 @@
+	 <!-- UPD (INSERIR EM CÓDIGO LIST/ADD/UPD EM MAIN.HTML)-->
+      <div>
+        <div style="max-width: 400px; margin: auto">
+          <h4>Artigo</h4>
+          <form>
+            <div class="form-group">
+              <label htmlFor="titulo"><strong>Título</strong></label>
+              <input
+                type="text"
+                class="form-control"
+                id="titulo"
+                value="Titulo"
+                onChange=""
+              />
+            </div>
+            <div class="form-group">
+              <label htmlFor="resumo"><strong>Resumo</strong></label>
+              <input
+                type="text"
+                class="form-control"
+                id="resumo"
+                value="Resumo"
+                onChange=""
+              />
+            </div>
+
+            <div class="form-group">
+              <br />
+              <label>
+                <strong>Status:</strong>
+              </label>
+              <b> publicado ou nao publicado </b>
+            </div>
+          </form>
+
+          <button class="m-2 btn btn-sm btn-primary mr-2" onClick="">
+            Alterar status
+          </button>
+
+          <button
+            class="m-2 btn btn-sm btn-danger mr-2"
+            onClick="{this.deleteArtigo}"
+          >
+            Excluir
+          </button>
+
+          <button
+            type="submit"
+            class="m-2 btn btn-sm btn-success"
+            onClick="{this.updateArtigo}"
+          >
+            Atualizar
+          </button>
+          <p>Mensagem</p>
+        </div>
+
+        <div>
+          <br />
+          <p><i>Para detalhes, selecionar um artigo.</i></p>
+        </div>
+      </div>
+
