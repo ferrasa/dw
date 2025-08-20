@@ -1,5 +1,6 @@
 import agenda from "./db.js";
 import express from "express";
+import { contatoModel, contatoModelUpdate } from "./check.js";
 
 const app = express();
 app.use(express.json());
@@ -22,6 +23,11 @@ app.get('/:id', (req, res) => {
 app.post('/', (req, res) => {
     const contato = req.body;
 
+    const {error} = contatoModel.validate(contato);
+    if (error){
+        res.status(400).send({mens: error.details[0].message});
+        return;
+    }
     agenda.push(contato);
     res.status(201).send(contato);
 });
@@ -37,13 +43,20 @@ app.delete('/:id', (req, res) =>{
 
 app.put('/:id', (req, res) => {
     const id = parseInt(req.params.id);
-    const contato = agenda.find( (c) => c.id === id);
+    const contato = agenda.find( (c) => c.id === id );
 
     const contatoAlterar = req.body;
-    const atributos = Object.keys(contatoAlterar);
     
+    const {error} = contatoModelUpdate.validate(contatoAlterar);
+    if (error){
+        res.status(400).send({mens: error.details[0].message});
+        return;
+    }
+
+    const atributos = Object.keys(contatoAlterar);
+
     for (let c of atributos)
-        contato[c] = contatoAlterar[c];
+        contato[c] = contatoAlterar[c]
 
     res.status(201).send(contato);
 
