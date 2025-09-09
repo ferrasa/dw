@@ -1,14 +1,28 @@
 package dw.editora.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "artigo")
 public class Artigo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(length = 80, nullable = false)
     private String titulo;
 
+    @Column(nullable = false)
     private String resumo;
 
-    private boolean publicado;
+    @Column(columnDefinition = "BOOLEAN DEFAULT TRUE")
+    private boolean publicado  = true;
 
     public Artigo(){}
 
