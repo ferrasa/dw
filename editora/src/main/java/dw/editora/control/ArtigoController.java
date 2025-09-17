@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -92,6 +93,61 @@ public class ArtigoController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }        
     }
+
+    /*
+     * DEL /:id : remover artigo dado um id
+     */
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteArtigo(@PathVariable("id") long id){
+        try {
+            rep.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    
+    }
+
+    /*
+     * GET /publicado : buscar por artigos publicados 
+     */
+    @GetMapping("/publicado")
+    public  ResponseEntity< List<Artigo> > getAllPublicado(){
+        try {
+            List<Artigo> la = new ArrayList<Artigo>();
+
+            rep.findByPublicado(true).forEach(la::add);
+
+            if (la.isEmpty())
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(la, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /*
+     * PUT /:id : atualizar artigo dado um id
+     */
+    @PutMapping("/{id}")
+    public ResponseEntity<Artigo> updateArtigo(@PathVariable("id") long id, @RequestBody Artigo a)
+    {
+        Optional<Artigo> data = rep.findById(id);
+
+        if (data.isPresent())
+        {
+            Artigo ar = data.get();
+            ar.setPublicado(a.isPublicado());
+            ar.setResumo(a.getResumo());
+            ar.setTitulo(a.getTitulo());
+
+            return new ResponseEntity<>(rep.save(ar), HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+    }
+
 
     
 }
