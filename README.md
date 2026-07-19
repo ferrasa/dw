@@ -13,7 +13,7 @@ Este repositório armazena todos os códigos-fonte, projetos e atividades práti
 *   **Universidade:** Universidade Estadual de Ponta Grossa (UEPG)
 *   **Curso:** Engenharia de Software
 *   **Disciplina:** Desenvolvimento Web
-*   **Ano/Semestre:** [2025/2]
+*   **Ano/Semestre:** [2026/2]
 
 ---
 
