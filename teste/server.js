@@ -6,6 +6,10 @@ function processa(req, res){
         res.write('<h1>Funcionou</h1>');
         res.end();
     }
+    else {
+        res.writeHead(404);
+        res.end('Não encontrado');
+  }
 }
 const servidor = http.createServer(processa);
 servidor.listen(3000);
