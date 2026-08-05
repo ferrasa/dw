@@ -109,4 +109,4 @@ app.put('/:id', (req, res) => {
 });
 
 // Inicializa o servidor HTTP na porta 3000 e exibe uma mensagem no console quando estiver rodando
-app.listen(3000, () => console.log('AGENDA - API WEB executandp...'));
+app.listen(3000, () => console.log('AGENDA - API WEB executando...'));
