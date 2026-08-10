@@ -1,6 +1,9 @@
 // Importa a lista de contatos (banco de dados simulado) a partir de um arquivo local chamado "db.js"
 import agenda from "./db.js";
 
+// Importa os schemas de validação do Joi do arquivo check.js
+import { contatoModel, contatoModelUpdate } from './check.js';
+
 // Importa o framework Express para a criação do servidor e manipulação de rotas HTTP
 import express from 'express';
 
@@ -41,6 +44,15 @@ app.get('/:id', (req, res) => {
 app.post('/', (req, res) => {
     // Obtém os dados enviados pelo cliente no corpo da requisição (body)
     const contato = req.body;
+
+    //Opcional: verifica formato de dados enviados para cadastro
+    const {error} = contatoModel.validate(contato);
+    if (error){
+        //error.details[0].message : obtem somente o texto da mensagem de erro.
+        res.status(400).send({mens: error});
+        return; // sai da execução do método
+    }
+
 
     // Verifica se já existe algum contato na agenda com o mesmo ID informado
     const existe = agenda.some( (c) => c.id === contato.id  );
@@ -95,6 +107,15 @@ app.put('/:id', (req, res) => {
     
     // Obtém os novos dados enviados no corpo da requisição
     const contatoAlterar = req.body;
+
+    //Opcional: verifica formato de dados enviados para alteração
+    const {error} = contatoModelUpdate.validate(contatoAlterar);
+    if (error){
+        //error.details[0].message : obtem somente o texto da mensagem de erro.
+        res.status(400).send({mens: error});
+        return; // sai da execução do método
+    }
+
 
     // Extrai todas as chaves (propriedades) enviadas no objeto de alteração
     const atributos = Object.keys(contatoAlterar);
