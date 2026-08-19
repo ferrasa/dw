@@ -83,7 +83,7 @@ app.post('/', async (req, res) => {
         const r = await db.query(sql, values);
 
         // Envia uma resposta com status 201 (Criado) e o resultado da operação de inserção.
-        res.status(201).send(r);
+        res.status(201).send(r.rows);
     }
     catch(e){
         // Captura e trata possíveis erros.
@@ -132,7 +132,7 @@ app.put('/:id', async (req, res) => {
         const r = await db.query(sql, valAtributos);
     
         // Envia uma resposta com status 200 (OK) e os dados do contato atualizado.
-        res.status(200).send(r.rows);
+        res.status(201).send(r.rows);
     }
     catch(e){
         // Captura e trata possíveis erros.
@@ -144,7 +144,29 @@ app.put('/:id', async (req, res) => {
 // ROTA PARA REMOVER UM CONTATO
 // Define um endpoint para requisições DELETE que espera um parâmetro 'id' na URL.
 app.delete('/:id', async (req, res) => {
+    // Extrai o 'id' dos parâmetros da rota.
+    const id = req.params.id;
 
+    try {
+        const sql = 'DELETE FROM contatos WHERE id = $1';
+        
+        // 1. Adicionado o 'await' para esperar a resposta do banco
+        const r = await db.query(sql, [id]);
+        
+        // 2. r.rowCount indica quantas linhas foram deletadas no PostgreSQL
+        if (r.rowCount === 0) {
+            // Se foi 0, o ID não existia no banco
+            return res.status(404).send({ erro: 'Contato não encontrado' });
+        }
+    
+        // Se passou do if, o contato existia e foi deletado
+        res.status(200).send({ mensagem: 'Contato removido' });
+    }
+    catch (e) {
+        // Captura e trata possíveis erros.
+        console.error(e);
+        res.status(500).send({ erro: 'Um erro interno ocorreu' });
+    }    
 });
 
 
