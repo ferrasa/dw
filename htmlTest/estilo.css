@@ -1,0 +1,40 @@
+/* 
+  SELETOR DE TAG: Aplica a todos os <h1> da página.
+  - font-style: italic; -> Deixa o texto em itálico.
+*/
+h1 {
+  font-style: italic;
+}
+
+/* 
+  SELETOR DE CLASSE: Pode ser aplicado a vários elementos.
+  - color: green; -> Deixa a cor do texto verde.
+  - font-weight: bold; -> Deixa o texto em negrito.
+  - font-size: 8pt; -> Define o tamanho da fonte como 8 pontos.
+*/
+.p1 {
+  color: green;
+  font-weight: bold;
+  font-size: 8pt;
+}
+
+/* 
+  SELETOR DE CLASSE: Também pode ser aplicado a vários elementos.
+  - color: gray; -> Deixa a cor do texto cinza.
+  - font-weight: normal; -> Deixa o texto com peso normal (não negrito).
+  - font-size: 8pt; -> Define o tamanho da fonte como 8 pontos.
+*/
+.p2 {
+  color: gray;
+  font-weight: normal;
+  font-size: 8pt;
+}
+
+/* 
+  SELETOR DE ID: Deve ser usado em um único elemento na página.
+  - background-color: rgb(27, 236, 205); -> Define a cor de fundo do elemento.
+*/
+#back{
+  background-color: rgb(27, 236, 205);
+}
+
