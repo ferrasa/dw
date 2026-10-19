@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:8000/api/autores/1
+method: PUT
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"Autor Teste Atualizado\",\r
+
+    \  \"email\": \"autor.atualizado@email.com\",\r
+
+    \  \"biografia\": \"Biografia atualizada para testar a API.\"\r
+
+    }"
+order: 5000

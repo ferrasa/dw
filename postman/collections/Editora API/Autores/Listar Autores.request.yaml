@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:8000/api/autores
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \    \"nome\": \"\",\r
+
+    \    \"descricao\": \"\",\r
+
+    \    \"preco\":\r
+
+    }"
+order: 1000

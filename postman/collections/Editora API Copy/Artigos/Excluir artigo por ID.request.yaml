@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:8000/api/artigos/1
+method: DELETE
+order: 7000

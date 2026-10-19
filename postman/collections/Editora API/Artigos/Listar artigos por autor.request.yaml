@@ -1,0 +1,4 @@
+$kind: http-request
+url: http://localhost:8000/api/autores/1/artigos
+method: GET
+order: 1000

@@ -1,0 +1,15 @@
+$kind: http-request
+url: http://localhost:8000/api/autores
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"nome\": \"Autor Teste\",\r
+
+    \  \"email\": \"autor.teste@email.com\",\r
+
+    \  \"biografia\": \"Autor cadastrado para testar a API.\"\r
+
+    }"
+order: 3000
