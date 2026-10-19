@@ -1,6 +1,7 @@
 package dw.editora.repository;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import dw.editora.entity.Autor;
 
@@ -14,4 +15,7 @@ public interface AutorRepository extends JpaRepository<Autor, Long> {
 
     List<Autor> findByNomeContainingIgnoreCase(String nome);
 
+    boolean existsByEmail(String email);
+
+    Optional<Autor> findByEmail(String email);
 }

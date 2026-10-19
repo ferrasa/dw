@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import dw.editora.entity.Artigo;
+import dw.editora.exception.RecursoNaoEncontradoException;
 import dw.editora.repository.ArtigoRepository;
 import dw.editora.repository.AutorRepository;
 
@@ -46,8 +47,8 @@ public class ArtigoService {
         Long autorId = artigo.getAutor().getId();
 
         var autor = autorRepository.findById(autorId)
-                .orElseThrow(() -> new IllegalArgumentException(
-                        "Autor não encontrado: " + autorId));
+                .orElseThrow(() -> new RecursoNaoEncontradoException(
+                        "Autor não encontrado com o ID: " + autorId));
 
         artigo.setAutor(autor);
 
@@ -60,6 +61,13 @@ public class ArtigoService {
             artigo.setTitulo(artigoAtualizado.getTitulo());
             artigo.setResumo(artigoAtualizado.getResumo());
             artigo.setPublicado(artigoAtualizado.isPublicado());
+            if (artigoAtualizado.getAutor() != null && artigoAtualizado.getAutor().getId() != null) {
+                Long autorId = artigoAtualizado.getAutor().getId();
+                var autor = autorRepository.findById(autorId)
+                        .orElseThrow(() -> new RecursoNaoEncontradoException(
+                                "Autor não encontrado com o ID: " + autorId));
+                artigo.setAutor(autor);
+            }
             return repository.save(artigo);
         });
     }

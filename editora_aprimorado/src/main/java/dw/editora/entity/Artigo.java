@@ -8,6 +8,8 @@
     import jakarta.persistence.JoinColumn;
     import jakarta.persistence.Id;
     import jakarta.persistence.Table;
+    import jakarta.validation.constraints.NotBlank;
+    import jakarta.validation.constraints.NotNull;
     import lombok.AllArgsConstructor;
     import lombok.EqualsAndHashCode;
     import lombok.Getter;
@@ -33,15 +35,18 @@
 
         
         
+        @NotBlank(message = "O título é obrigatório")
         @Column(nullable = false, length = 80)
         private String titulo;
         
+        @NotBlank(message = "O resumo é obrigatório")
         @Column(nullable = false)
         private String resumo;
 
         @Column(columnDefinition = "BOOLEAN DEFAULT TRUE") 
         private boolean publicado = true; // Já inicializamos como true no objeto
 
+        @NotNull(message = "O autor é obrigatório")
         @ManyToOne
         @JoinColumn(name = "autor_id", nullable = false)
         private Autor autor;

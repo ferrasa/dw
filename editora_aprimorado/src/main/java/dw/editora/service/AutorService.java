@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import dw.editora.entity.Artigo;
 import dw.editora.entity.Autor;
+import dw.editora.exception.ConflitoNegocioException;
+import dw.editora.exception.RecursoNaoEncontradoException;
 import dw.editora.repository.AutorRepository;
 
 @Service
@@ -36,6 +38,10 @@ public class AutorService {
     }
 
     public Autor salvar(Autor autor) {
+        if (autor.getEmail() != null && repository.existsByEmail(autor.getEmail())) {
+            throw new ConflitoNegocioException(
+                    "Já existe um autor cadastrado com o e-mail: " + autor.getEmail());
+        }
         return repository.save(autor);
     }
 
@@ -43,6 +49,14 @@ public class AutorService {
             Long id,
             Autor autorAtualizado) {
         return repository.findById(id).map(autor -> {
+            if (autorAtualizado.getEmail() != null
+                    && !autorAtualizado.getEmail().equalsIgnoreCase(autor.getEmail())) {
+                if (repository.existsByEmail(autorAtualizado.getEmail())) {
+                    throw new ConflitoNegocioException(
+                            "Já existe outro autor cadastrado com o e-mail: " + autorAtualizado.getEmail());
+                }
+            }
+
             autor.setNome(autorAtualizado.getNome());
             autor.setEmail(autorAtualizado.getEmail());
             autor.setBiografia(autorAtualizado.getBiografia());
@@ -69,6 +83,10 @@ public class AutorService {
     }
 
     public List<Artigo> listarArtigosPorAutor(Long autorId) {
+        if (!repository.existsById(autorId)) {
+            throw new RecursoNaoEncontradoException(
+                    "Autor não encontrado com o ID: " + autorId);
+        }
         return artigoService.listarPorAutor(autorId);
     }
 }

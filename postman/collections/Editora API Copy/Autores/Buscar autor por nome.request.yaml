@@ -1,6 +1,0 @@
-$kind: http-request
-url: http://localhost:8000/api/autores/nome?filtro=Machado
-method: GET
-queryParams:
-  filtro: Machado
-order: 4000

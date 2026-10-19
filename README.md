@@ -17,6 +17,23 @@ Este repositório armazena todos os códigos-fonte, projetos e atividades práti
 
 ---
 
+## 📦 Projetos
+
+*   [**Trabalho 01 — Framework Spring Boot (Editora API)**](editora_aprimorado/README.md): Evolução da API da Editora com inclusão da entidade `Autor`, relacionamento `@ManyToOne`/`@OneToMany` com `Artigo`, endpoints REST, validações e testes automatizados.
+
+---
+
 ## 📜 Licença
 
 Este projeto é distribuído sob a licença MIT. Isso significa que você pode usar, copiar, modificar e distribuir o código livremente, desde que os devidos créditos sejam mantidos.
+
+---
+
+## Alunos
+
+Nome: Luis Felipe da Rosa Teixeira
+RA: 25090823
+Nome: 
+RA:
+Nome: 
+RA:
