@@ -9,7 +9,7 @@ class ArtigoDataService {
   getAll() {
     // Método para buscar todos os artigos.
     return http.get("/");
-    // Faz uma requisição GET para a URL base (ex: "http://136.248.68.47/editora/").
+    // Faz uma requisição GET para a URL base (ex: "http://localhost:8000/editora/").
   }
 
   get(id) {
